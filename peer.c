@@ -3,6 +3,7 @@
  @brief ENet peer management functions
 */
 #include <string.h>
+#include <stdio.h>
 #define ENET_BUILDING_LIB 1
 #include "enet/enet.h"
 
@@ -381,6 +382,11 @@ enet_peer_on_disconnect (ENetPeer * peer)
 void
 enet_peer_reset (ENetPeer * peer)
 {
+    if (peer->data != NULL) {
+        printf("peer has been reset remoteIp:%s, connectId:%u, localPeerID:%u, remotePeerID:%u\n",
+               (char *) peer->data, peer->connectID, peer->incomingPeerID, peer->outgoingPeerID);
+    }
+
     enet_peer_on_disconnect (peer);
         
     peer -> outgoingPeerID = ENET_PROTOCOL_MAXIMUM_PEER_ID;

@@ -152,6 +152,13 @@ typedef struct _ENetPacket
    enet_uint8 *             data;            /**< allocated data for packet */
    size_t                   dataLength;      /**< length of data */
    ENetPacketFreeCallback   freeCallback;    /**< function to be called when the packet is no longer in use */
+    //为了提升IO线程性能,在这里暂存必要字段
+    uint32_t                 cmd;
+    uint64_t                 msgId;
+    in_addr_t                targetIp;
+    in_addr_t                sourceIp;
+    char *                   sourceIpStr;
+    //这个字段被用于msgqueue拉链
    void *                   userData;        /**< application private data, may be freely modified */
 } ENetPacket;
 
