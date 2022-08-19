@@ -11,6 +11,7 @@ extern "C"
 #endif
 
 #include <stdlib.h>
+#include <stdint.h>
 
 #ifdef _WIN32
 #include "enet/win32.h"
@@ -153,10 +154,10 @@ typedef struct _ENetPacket
    size_t                   dataLength;      /**< length of data */
    ENetPacketFreeCallback   freeCallback;    /**< function to be called when the packet is no longer in use */
     //为了提升IO线程性能,在这里暂存必要字段
-    uint32_t                 cmd;
-    uint64_t                 msgId;
-    in_addr_t                targetIp;
-    in_addr_t                sourceIp;
+    enet_uint32                cmd;
+    enet_uint64                msgId;
+    enet_uint32               targetIp;
+    enet_uint32                sourceIp;
     char *                   sourceIpStr;
     //这个字段被用于msgqueue拉链
    void *                   userData;        /**< application private data, may be freely modified */
